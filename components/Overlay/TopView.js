@@ -86,11 +86,11 @@ export default class TopView extends Component {
       return;
     }
 
-    DeviceEventEmitter.addListener("addOverlay", e => this.handler.add(e));
-    DeviceEventEmitter.addListener("removeOverlay", e => this.handler.remove(e));
-    DeviceEventEmitter.addListener("removeAllOverlay", e => this.handler.removeAll(e));
-    DeviceEventEmitter.addListener("transformRoot", e => this.handler.transform(e));
-    DeviceEventEmitter.addListener("restoreRoot", e => this.handler.restore(e));
+    this.addOverlay = DeviceEventEmitter.addListener("addOverlay", e => this.handler.add(e));
+    this.removeOverlay = DeviceEventEmitter.addListener("removeOverlay", e => this.handler.remove(e));
+    this.removeAllOverlay = DeviceEventEmitter.addListener("removeAllOverlay", e => this.handler.removeAll(e));
+    this.transformRoot = DeviceEventEmitter.addListener("transformRoot", e => this.handler.transform(e));
+    this.restoreRoot = DeviceEventEmitter.addListener("restoreRoot", e => this.handler.restore(e));
   }
 
   componentWillUnmount() {
@@ -100,11 +100,11 @@ export default class TopView extends Component {
       return;
     }
 
-    DeviceEventEmitter.removeAllListeners("addOverlay");
-    DeviceEventEmitter.removeAllListeners("removeOverlay");
-    DeviceEventEmitter.removeAllListeners("removeAllOverlay");
-    DeviceEventEmitter.removeAllListeners("transformRoot");
-    DeviceEventEmitter.removeAllListeners("restoreRoot");
+    this.addOverlay && this.addOverlay.remove(); 
+    this.removeOverlay &&  this.removeOverlay.remove(); 
+    this.removeAllOverlay && this.removeAllOverlay.remove(); 
+    this.transformRoot && this.transformRoot.remove(); 
+    this.restoreRoot && this.restoreRoot.remove(); 
   }
 
   add(e) {
